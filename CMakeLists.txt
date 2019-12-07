@@ -6,18 +6,17 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 option(BUILD_COVERAGE "Build coverage" OFF)
 
 set(
-  HUNTER_CACHE_SERVERS
-  "https://github.com/bmstu-iu8-cpp-sem-3/hunter-cache"
-  CACHE STRING "Default cache server"
+        HUNTER_CACHE_SERVERS
+        "https://github.com/bmstu-iu8-cpp-sem-3/hunter-cache"
+        CACHE STRING "Default cache server"
 )
 
 include("tools/gate/cmake/HunterGate.cmake")
 
-HunterGate(
-  URL "https://github.com/cpp-pm/hunter/archive/v0.23.218.tar.gz"
-  SHA1 "9a3594a61227967fb92159339ba326701b287b19"
+huntergate(
+        URL "https://github.com/ruslo/hunter/archive/v0.23.34.tar.gz"
+        SHA1 "70287b1ffa810ee4e952052a9adff9b4856d0d54"
 )
-
 
 # TODO: rename project and delete this comment
 project(template)
@@ -28,28 +27,39 @@ string(APPEND CMAKE_CXX_FLAGS " -Wshadow -Wnon-virtual-dtor")
 hunter_add_package(GTest)
 find_package(GTest CONFIG REQUIRED)
 
+hunter_add_package(nlohmann_json)
+find_package(nlohmann_json CONFIG REQUIRED)
 # TODO: change template word to project name and delete this comment
-add_library(template STATIC
-  # enum your files and delete this comment
-  ${CMAKE_CURRENT_SOURCE_DIR}/sources/source.cpp
-)
+add_library(${PROJECT_NAME} STATIC
+        # enum your files and delete this comment
+        ${CMAKE_CURRENT_SOURCE_DIR}/sources/json.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/helpFunctions.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/json.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/task3.hpp include/task3.hpp)
 add_executable(tests
-  # TODO: enum your files and delete this comment
-  ${CMAKE_CURRENT_SOURCE_DIR}/tests/test.cpp
-)
+        # TODO: enum your files and delete this comment
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/test.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/test3.cpp tests/test3.cpp)
+
+target_link_libraries(template
+        PUBLIC
+        nlohmann_json::nlohmann_json
+        )
 
 # TODO: change template word to project name and delete this comment
-target_include_directories(template 
-  PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
-)
-target_include_directories(tests 
-  PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
-)
+target_include_directories(${PROJECT_NAME}
+        PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
+        nlohmann_json::nlohmann_json
+        )
+target_include_directories(tests
+        PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
+        nlohmann_json::nlohmann_json
+        )
 # TODO: change template word to project name and delete this comment
 target_link_libraries(tests GTest::main template)
 
 enable_testing()
-add_test(NAME unit_tests COMMAND tests) 
+add_test(NAME unit_tests COMMAND tests)
 
 if(BUILD_COVERAGE)
   set(ENABLE_COVERAGE ON CACHE BOOL "Enable coverage build." FORCE)
