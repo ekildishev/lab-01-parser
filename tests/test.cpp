@@ -37,7 +37,6 @@ TEST(Json, Example1) {
 }
 
 TEST(Json, EmptyJson) {
-
     Json some{};
     EXPECT_EQ(some.is_object(), false);
     EXPECT_EQ(some.is_array(), false);
