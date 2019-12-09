@@ -13,7 +13,8 @@ jobs:
   include:
     - name: "compile"
       script:
-        - docker run -t -v $(pwd):/var/builder/ -w /var/builder --entrypoint ./scripts/compile.sh $DOCKER_IMAGE
+        - chmod 755 scripts/*.sh
+        - docker run -v `pwd`:`pwd` -w `pwd` -t rusdevops/bootstrap-cpp scripts/compile.sh
     - name: "checks"
       script:
         - docker run -v `pwd`:`pwd` -w `pwd` rusdevops/bootstrap-cpp scripts/checks.sh
