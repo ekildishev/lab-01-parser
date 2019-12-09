@@ -44,5 +44,4 @@ TEST(Json, task3) {
     EXPECT_EQ(my_json[0]["description"], "Futures contract for USD/RUB");
     EXPECT_EQ(my_json[1]["description"], "Futures contract for index RTS");
     EXPECT_EQ(my_json[2]["description"], "Futures contract for Gazprom shares");
-
 }

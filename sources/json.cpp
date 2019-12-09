@@ -28,7 +28,6 @@ size_t Json::getArrSize() const {
     return array.size();
   } else
     throw WrongJson("It is not an array!");
-  ;
 }
 
 std::pair<std::experimental::any, unsigned int> getValueAndLen(
