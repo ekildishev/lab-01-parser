@@ -13,8 +13,9 @@ Json::Json(const std::string &s) {
     object = getObject(s, i + 1);
   } else if (s[i] == '[') {
     array = getArray(s, i + 1);
-  } else
+  } else {
     throw WrongJson("Illegal string!");
+  }
 }
 
 bool Json::is_array() const { return !array.empty(); }
@@ -26,8 +27,9 @@ bool Json::is_empty() const { return object.empty() && array.empty(); }
 size_t Json::getArrSize() const {
   if (is_array()) {
     return array.size();
-  } else
+  } else {
     throw WrongJson("It is not an array!");
+  }
 }
 
 std::pair<std::experimental::any, unsigned int> getValueAndLen(
@@ -63,8 +65,9 @@ std::pair<std::experimental::any, unsigned int> getValueAndLen(
   } else if (s.substr(i, 4) == "null") {
     i += 4;
     result = nullptr;
-  } else
+  } else {
     throw WrongJson("Illegal string!");
+  }
 
   return std::pair<std::experimental::any, unsigned int>(result, i - start);
 }
