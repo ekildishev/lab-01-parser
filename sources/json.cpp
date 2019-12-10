@@ -6,7 +6,7 @@
 #include "json.hpp"
 
 Json::Json(const std::string &s) {
-  int i = 0;
+  unsigned int i = 0;
   i = missSpaces(s, i);
 
   if (s[i] == '{') {
@@ -95,7 +95,7 @@ std::vector<std::experimental::any> Json::getArray(const std::string &s,
 
   while (i < s.length()) {
     i = missSpaces(s, i);
-    std::pair<std::experimental::any, int> p = getValueAndLen(s, i);
+    std::pair<std::experimental::any, unsigned int> p = getValueAndLen(s, i);
 
     i += p.second;
     result.push_back(p.first);
