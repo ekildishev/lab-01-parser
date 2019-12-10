@@ -16,9 +16,9 @@ int findEnd(const std::string &s, int start, char openSym, char closeSym) {
   for (unsigned int j = start + 1; j < s.length(); ++j) {
     char symbol = s[j];
     if (symbol == openSym) {
-      ++openC;
+      openC++;
     } else if (symbol == closeSym) {
-      ++closeC;
+      closeC++;
     }
     if (openC == closeC) {
       i = j;
