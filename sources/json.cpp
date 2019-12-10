@@ -125,7 +125,7 @@ std::map<std::string, std::experimental::any> Json::getObject(
     std::string key = getString(s, i);
     i += key.length() + 2;
     i = missSpaces(s, i);
-    if (s[i++] != ':') {
+    if (s[++i] != ':') {
       throw WrongJson("Illegal string!");
     }
     i = missSpaces(s, i);
@@ -136,7 +136,7 @@ std::map<std::string, std::experimental::any> Json::getObject(
     if (s[i] == '}') {
       break;
     }
-    if (s[i++] == ',') {
+    if (s[++i] == ',') {
       continue;
     }
     throw WrongJson("Illegal string!");

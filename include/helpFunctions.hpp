@@ -13,12 +13,12 @@ int findEnd(const std::string &s, int start, char openSym, char closeSym) {
   unsigned int i = 0;
   unsigned int openC = 1;
   unsigned int closeC = 0;
-  for (unsigned int j = start + 1; j < s.length(); j++) {
+  for (unsigned int j = start + 1; j < s.length(); ++j) {
     char symbol = s[j];
     if (symbol == openSym) {
-      openC++;
+      ++openC;
     } else if (symbol == closeSym) {
-      closeC++;
+      ++closeC;
     }
     if (openC == closeC) {
       i = j;
